@@ -15,6 +15,7 @@
 			position: absolute;
 			width: 100%;
 			height: 100%;
+
 		}
 	</style>
 </head>
@@ -48,7 +49,7 @@
 	var uc=(ry4-ry3)*(rx2-rx1)-(rx4-rx3)*(ry2-ry1);
 	var ua=((rx4-rx3)*(ry1-ry3)-(ry4-ry3)*(rx1-rx3))/uc;
 	var ub=((rx2-rx1)*(ry1-ry3)-(ry2-ry1)*(rx1-rx3))/uc;
-	if(!z)z=0.000000001;
+	if(!z)z=0.0000000001;
 	if(ua>0&&ua<1&&ub>0&&ub<1){
 		return {
 			x:vars.cx+(rx1+ua*(rx2-rx1))*vars.scale,
@@ -65,13 +66,13 @@ function elevation(x,y,z){
 
 	var dist = Math.sqrt(x*x+y*y+z*z);
 	if(dist && z/dist>=-1 && z/dist <=1) return Math.acos(z / dist);
-	return 0.00000001;
+	return 0.000000001;
 }
 
 
 function rgb(col){
 
-	col += 0.000001;
+	col += 0.0000001;
 	var r = parseInt((0.5+Math.sin(col)*0.5)*16);
 	var g = parseInt((0.5+Math.cos(col)*0.5)*16);
 	var b = parseInt((0.5-Math.sin(col)*0.5)*16);
@@ -89,7 +90,7 @@ function interpolateColors(RGB1,RGB2,degree){
 
 function rgbArray(col){
 
-	col += 0.000001;
+	col += 0.0000001;
 	var r = parseInt((0.5+Math.sin(col)*0.5)*256);
 	var g = parseInt((0.5+Math.cos(col)*0.5)*256);
 	var b = parseInt((0.5-Math.sin(col)*0.5)*256);
@@ -190,7 +191,7 @@ function sortFunction(a,b){
 function draw(vars){
 
 	vars.ctx.globalAlpha=.15;
-	vars.ctx.fillStyle="#000";
+	vars.ctx.fillStyle="pink";
 	vars.ctx.fillRect(0, 0, canvas.width, canvas.height);
 	
 	drawFloor(vars);
@@ -246,19 +247,19 @@ function frame(vars) {
 		}, true);
 		vars.frameNo=0;
 
-		vars.camX = 0;
-		vars.camY = 0;
-		vars.camZ = -14;
+		vars.camX = 5;
+		vars.camY = 5;
+		vars.camZ = -15;
 		vars.pitch = elevation(vars.camX, vars.camZ, vars.camY) - Math.PI / 2;
-		vars.yaw = 0;
+		vars.yaw = 5;
 		vars.cx=vars.canvas.width/2;
 		vars.cy=vars.canvas.height/2;
-		vars.bounding=10;
+		vars.bounding=100;
 		vars.scale=500;
 		vars.floor=26.5;
 
 		vars.points=[];
-		vars.initParticles=700;
+		vars.initParticles=1000;
 		vars.initV=.01;
 		vars.distributionRadius=800;
 		vars.vortexHeight=25;
